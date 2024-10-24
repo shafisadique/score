@@ -25,12 +25,17 @@
         // Function to dynamically update MatchID in the iframe
         function loadMatch() {
             const matchId = getQueryParam('MatchID'); // Extract MatchID from the URL
+            const iframe = document.getElementById('matchIframe');
+
             if (matchId) {
                 const baseUrl = "https://new.zioplay.live/score1.html?MatchID=";
-                const iframe = document.getElementById('matchIframe');
-                iframe.src = baseUrl + matchId; // Set iframe source with the extracted MatchID
+                const finalUrl = baseUrl + matchId;
+                iframe.src = finalUrl; // Set iframe source with the extracted MatchID
+                console.log('Loading iframe with MatchID:', matchId);
+                console.log('Final iframe URL:', finalUrl);
             } else {
-                console.log('MatchID not found in the URL.');
+                console.error('MatchID not found in the URL.');
+                iframe.src = ""; // Clear the iframe if MatchID is missing
             }
         }
 

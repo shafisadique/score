@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic iFrame with MatchID from URL</title>
+</head>
+<body>
+
+    <!-- This is the iFrame that will load dynamically based on MatchID -->
+    <iframe
+        id="matchIframe"
+        width="100%"
+        height="600px"
+        frameborder="0"
+        allowfullscreen>
+    </iframe>
+
+    <script>
+        // Function to get the query parameters from the current URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to dynamically update MatchID in the iframe
+        function loadMatch() {
+            const matchId = getQueryParam('MatchID'); // Extract MatchID from the URL
+            if (matchId) {
+                const baseUrl = "https://new.zioplay.live/score1.html?MatchID=";
+                const iframe = document.getElementById('matchIframe');
+                iframe.src = baseUrl + matchId; // Set iframe source with the extracted MatchID
+            } else {
+                console.log('MatchID not found in the URL.');
+            }
+        }
+
+        // Automatically load the match based on the URL
+        loadMatch();
+    </script>
+
+</body>
+</html>
